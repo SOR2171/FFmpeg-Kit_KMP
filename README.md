@@ -10,6 +10,14 @@ This is a Kotlin Multiplatform lib project targeting Android, Desktop (JVM).
 ![](https://img.shields.io/github/license/sor2171/Audio-Detection-Tool_FFmpegKit.svg)
 ![](https://img.shields.io/badge/Kotlin_Multiplatform-7F52FF?style=flat&logo=kotlin&logoColor=white)
 
+## Use With Gradle
+
+```kotlin
+commonMain.dependencies {
+    implementation("io.github.sor2171:ffmpeg-kit-kmp:0.11.1")
+}
+```
+
 ## About FFmpeg
 
 I use the release from [FFmpeg Kit](https://github.com/akashskypatel/ffmpeg-kit-builders),

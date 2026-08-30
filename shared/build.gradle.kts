@@ -56,10 +56,6 @@ kotlin {
     }
 }
 
-dependencies {
-    androidRuntimeClasspath(libs.compose.uiTooling)
-}
-
 mavenPublishing {
     coordinates(
         groupId = "io.github.sor2171",
