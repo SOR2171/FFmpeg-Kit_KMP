@@ -13,7 +13,18 @@ This is a Kotlin Multiplatform lib project targeting Android, Desktop (JVM).
 ## About FFmpeg
 
 I use the release from [FFmpeg Kit](https://github.com/akashskypatel/ffmpeg-kit-builders),
-with license of LGPL-3.0 license.
+by [akashskypatel](https://github.com/akashskypatel), with license of LGPL-3.0 license.
+
+## About Supported Platforms
+
+|         | X86 | X64 | Arm32 | Arm64 |
+|---------|-----|-----|-------|-------|
+| Android |     | ✅   | ✅     | ✅     |
+| IOS     |     |     |       |       |
+| Windows |     | ✅   |       |       |
+| Linux   |     | ✅   |       |       |
+| MacOS   |     |     |       | ✅     |
 
 I can't test the macOS and IOS version. So, here is no release for IOS. Welcome for your PR.
 
+The version of IOS will come, but not soon.
