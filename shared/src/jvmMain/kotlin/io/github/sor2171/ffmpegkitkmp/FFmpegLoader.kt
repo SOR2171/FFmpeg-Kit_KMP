@@ -1,5 +1,6 @@
 package io.github.sor2171.ffmpegkitkmp
 
+import io.github.sor2171.ffmpegkitkmp.Platform.Os
 import java.io.File
 
 object NativeLibraryLoader {
@@ -37,24 +38,19 @@ object NativeLibraryLoader {
     }
 
     private fun getPlatformLibraryInfo(): Pair<String, String> {
-        val os = System.getProperty("os.name").lowercase()
-        val arch = System.getProperty("os.arch").lowercase()
+        val platform = currentPlatform()
 
-        return when {
-            os.contains("win") && arch.contains("64") -> {
-                "/natives/windows-x86_64/libffmpegkit.dll" to ".dll"
-            }
+        return when (platform.os) {
+            Os.Windows if platform.architecture == Platform.Architecture.X86_64
+                -> "/natives/windows-x86_64/libffmpegkit.dll" to ".dll"
 
-            os.contains("mac") && arch.contains("64") -> {
-                "/natives/macos-universal/ffmpegkit.dylib" to ".dylib"
-            }
+            Os.MacOS if platform.architecture == Platform.Architecture.Arm64
+                -> "/natives/macos-universal/ffmpegkit.dylib" to ".dylib"
 
-            (os.contains("nux") || arch.contains("nix"))
-                    && arch.contains("64") -> {
-                "/natives/linux-x86_64/libffmpegkit.so" to ".so"
-            }
+            Os.Linux if platform.architecture == Platform.Architecture.X86_64
+                -> "/natives/linux-x86_64/libffmpegkit.so" to ".so"
 
-            else -> throw UnsupportedOperationException("不支持的操作系统: $os")
+            else -> throw UnsupportedOperationException("Unsupported OS: ${platform.os}, architecture: ${platform.architecture}.")
         }
     }
 }
