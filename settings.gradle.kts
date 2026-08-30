@@ -1,3 +1,5 @@
+@file:Suppress("UnstableApiUsage")
+
 rootProject.name = "FFmpegKitKmp"
 
 pluginManagement {
@@ -31,4 +33,5 @@ plugins {
     id("org.gradle.toolchains.foojay-resolver-convention") version "1.0.0"
 }
 
+include(":ffmpeg-aar-wrapper")
 include(":shared")

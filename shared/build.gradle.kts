@@ -4,8 +4,6 @@ plugins {
     id("com.vanniktech.maven.publish") version "0.37.0"
     alias(libs.plugins.kotlinMultiplatform)
     alias(libs.plugins.androidMultiplatformLibrary)
-    alias(libs.plugins.composeMultiplatform)
-    alias(libs.plugins.composeCompiler)
 }
 
 group = "io.github.sor2171"
@@ -40,27 +38,25 @@ kotlin {
     sourceSets {
         androidMain.dependencies {
             // https://github.com/akashskypatel/ffmpeg-kit-builders
-            implementation(files("libs/bundle-base-shared-lgpl-release.aar"))
+            implementation(project(":ffmpeg-aar-wrapper"))
 
+            //noinspection UseTomlInstead
             implementation("net.java.dev.jna:jna:5.19.1@aar")
+            implementation(libs.androidx.junit.ktx)
+            implementation(libs.androidx.junit)
+            implementation(libs.androidx.espresso.core)
         }
         commonMain.dependencies {
             implementation(libs.compose.runtime)
             implementation(libs.compose.foundation)
-            implementation(libs.compose.material3)
-            implementation(libs.compose.ui)
             implementation(libs.compose.components.resources)
-            implementation(libs.compose.uiToolingPreview)
-        }
-        commonTest.dependencies {
-            implementation(libs.androidx.junit.ktx)
-            implementation(libs.kotlin.test)
-            implementation(libs.androidx.junit)
-            implementation(libs.androidx.espresso.core)
         }
         jvmMain.dependencies {
             implementation(libs.jna)
             implementation(libs.slf4j.simple)
+        }
+        jvmTest.dependencies {
+            implementation(libs.kotlin.test)
         }
     }
 }

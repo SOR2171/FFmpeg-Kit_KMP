@@ -9,6 +9,7 @@ class FFmpegTest {
 
         val code = FFmpegRunner.execute(command)
         println("Code = $code")
+        assert(code == 0)
     }
 
     @Test
