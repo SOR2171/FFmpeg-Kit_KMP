@@ -42,21 +42,16 @@ kotlin {
 
             //noinspection UseTomlInstead
             implementation("net.java.dev.jna:jna:5.19.1@aar")
-            implementation(libs.androidx.junit.ktx)
-            implementation(libs.androidx.junit)
             implementation(libs.androidx.espresso.core)
         }
         commonMain.dependencies {
-            implementation(libs.compose.runtime)
-            implementation(libs.compose.foundation)
-            implementation(libs.compose.components.resources)
+        }
+        commonTest.dependencies {
+            implementation(libs.kotlin.test)
         }
         jvmMain.dependencies {
             implementation(libs.jna)
             implementation(libs.slf4j.simple)
-        }
-        jvmTest.dependencies {
-            implementation(libs.kotlin.test)
         }
     }
 }

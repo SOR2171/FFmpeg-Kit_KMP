@@ -1,10 +1,7 @@
 package io.github.sor2171.ffmpegkitkmp
 
-import androidx.test.ext.junit.runners.AndroidJUnit4
 import org.junit.Test
-import org.junit.runner.RunWith
 
-@RunWith(AndroidJUnit4::class)
 class FFmpegTestForAndroid {
 
     private fun runCommand(command: String) {
