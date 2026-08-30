@@ -15,7 +15,7 @@ kotlin {
     jvm()
 
     android {
-        namespace = "io.github.sor2171.ffmpegkitkmp.shared"
+        namespace = "io.github.sor2171.ffmpegkitkmp"
         compileSdk = libs.versions.android.compileSdk.get().toInt()
         minSdk = libs.versions.android.minSdk.get().toInt()
 
@@ -61,11 +61,17 @@ dependencies {
 }
 
 mavenPublishing {
+    coordinates(
+        groupId = "io.github.sor2171",
+        artifactId = "ffmpeg-kit-kmp",
+        version = findProperty("VERSION")?.toString() ?: "dev"
+    )
+
     pom {
-        name.set("FFmegKitKmp")
+        name.set("FFmpegKitKmp")
 
         description.set(
-            "FFmegKitKmp is a FFmpeg runner for Android and all JVM."
+            "FFmpegKitKmp is a FFmpeg runner for Android and all JVM."
         )
 
         inceptionYear.set("2026")
