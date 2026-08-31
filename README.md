@@ -18,6 +18,16 @@ commonMain.dependencies {
 }
 ```
 
+If you encounter with this error:
+
+```bash
+C:\Users\32721\AppData\Local\Temp\ffmpegkit_2621802206663535111.dll: %1 不是有效的 Win32 应用程序。
+	at java.base/jdk.internal.loader.NativeLibraries.load(Native Method)
+	......
+```
+
+Please compile the jars yourself and get them in [`./shared/build/libs`](./shared/build/libs).
+
 ## About FFmpeg
 
 I use the release from [FFmpeg Kit](https://github.com/akashskypatel/ffmpeg-kit-builders),
