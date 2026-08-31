@@ -9,13 +9,14 @@ plugins {
 val githubRepo = "https://github.com/SOR2171/FFmpeg-Kit_KMP"
 val githubRepoGit = "github.com/sor2171/FFmpeg-Kit_KMP.git"
 val groupId = "io.github.sor2171"
-val archivesName = "ffmpeg-kit-kmp"
+val packageName = "ffmpeg-kit-kmp"
+val packageVersion = findProperty("VERSION")?.toString() ?: "dev"
 
 group = groupId
-version = findProperty("VERSION")?.toString() ?: "dev"
+version = packageVersion
 
 base {
-    archivesName.set(archivesName)
+    archivesName.set(packageName)
 }
 
 kotlin {
@@ -31,9 +32,6 @@ kotlin {
         }
         androidResources {
             enable = true
-        }
-        withHostTest {
-            isIncludeAndroidResources = true
         }
         withDeviceTestBuilder {
             sourceSetTreeName = "test"
@@ -66,8 +64,8 @@ kotlin {
 mavenPublishing {
     coordinates(
         groupId = groupId,
-        artifactId = archivesName,
-        version = findProperty("VERSION")?.toString() ?: "dev"
+        artifactId = packageName,
+        version = packageVersion
     )
 
     pom {
