@@ -30,18 +30,18 @@ Please compile the jars yourself and get them in [`./shared/build/libs`](./share
 
 ## About FFmpeg
 
-I use the release from [FFmpeg Kit](https://github.com/akashskypatel/ffmpeg-kit-builders),
+I use the release from [FFmpeg Kit](https://github.com/akashskypatel/ffmpeg-kit-builders) (release v0.11.0),
 by [akashskypatel](https://github.com/akashskypatel), with license of LGPL-3.0 license.
 
 ## About Supported Platforms
 
 |         | X86 | X64 | Arm32 | Arm64 |
-|---------|-----|-----|-------|-------|
-| Android |     | ✅   | ✅     | ✅     |
+|---------|:---:|:---:|:-----:|:-----:|
+| Android |     |  ✅  |   ✅   |   ✅   |
 | IOS     |     |     |       |       |
-| Windows |     | ✅   |       |       |
-| Linux   |     | ✅   |       |       |
-| MacOS   |     |     |       | ✅     |
+| Windows |     |  ✅  |       |       |
+| Linux   |     |  ✅  |       |       |
+| MacOS   |     |     |       |   ✅   |
 
 I can't test the macOS and IOS version. So, here is no release for IOS. Welcome for your PR.
 

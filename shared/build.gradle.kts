@@ -6,10 +6,17 @@ plugins {
     alias(libs.plugins.androidMultiplatformLibrary)
 }
 
-group = "io.github.sor2171"
-version = findProperty("VERSION")?.toString() ?: "dev"
 val githubRepo = "https://github.com/SOR2171/FFmpeg-Kit_KMP"
 val githubRepoGit = "github.com/sor2171/FFmpeg-Kit_KMP.git"
+val groupId = "io.github.sor2171"
+val archivesName = "ffmpeg-kit-kmp"
+
+group = groupId
+version = findProperty("VERSION")?.toString() ?: "dev"
+
+base {
+    archivesName.set(archivesName)
+}
 
 kotlin {
     jvm()
@@ -58,8 +65,8 @@ kotlin {
 
 mavenPublishing {
     coordinates(
-        groupId = "io.github.sor2171",
-        artifactId = "ffmpeg-kit-kmp",
+        groupId = groupId,
+        artifactId = archivesName,
         version = findProperty("VERSION")?.toString() ?: "dev"
     )
 
