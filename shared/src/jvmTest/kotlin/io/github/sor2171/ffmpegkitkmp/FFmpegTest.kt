@@ -5,11 +5,13 @@ import kotlin.test.Test
 class FFmpegTest {
 
     private fun runCommand(vararg command: String) {
-        println("$ ffmpeg ${command.contentToString()}")
+        val cmd = StringBuilder()
+        command.forEach { cmd.append(it).append(" ") }
+        println("$ ffmpeg $cmd")
 
-        val code = FFmpegRunner.execute(*command)
-        println("Code = $code")
-        assert(code == 0)
+        val output = FFmpegRunner.execute(*command)
+        println("output = $output")
+        assert(output != null)
     }
 
     @Test
@@ -28,5 +30,17 @@ class FFmpegTest {
             "-i testsrc=duration=10:size=1920x1080:rate=60",
             "-f null -"
         )
+    }
+
+    @Test
+    fun ffprobe() {
+        val result = FFmpegRunner.ffprobe(
+            "-v quiet",
+            "-print_format json",
+            "-show_format",
+            "-show_streams",
+            "D:\\Media\\Blender\\output\\meteor_Miku.mp4"
+        )
+        println(result)
     }
 }

@@ -18,7 +18,7 @@ commonMain.dependencies {
 }
 ```
 
-Run command like this:
+Run FFmpeg command like this:
 ```kotlin
 fun runCommand(vararg command: String) {
     println("$ ffmpeg ${command.contentToString()}")
@@ -37,6 +37,8 @@ fun testFFmpegCreateColorBar() {
     )
 }
 ```
+
+Run FFprobe command like this:
 
 If you encounter with this error:
 

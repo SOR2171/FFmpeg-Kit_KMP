@@ -7,5 +7,6 @@ expect object FFmpegRunner {
      * @param cmd 例如 "-i input.mp3 -f s16le output.pcm"
      * @return 返回码 (0 代表成功)
      */
-    fun execute(vararg cmd: String): Int
+    fun execute(vararg cmd: String): String?
+    fun ffprobe(vararg cmd: String): String?
 }
