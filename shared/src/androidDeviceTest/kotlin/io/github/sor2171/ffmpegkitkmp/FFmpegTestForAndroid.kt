@@ -4,10 +4,10 @@ import org.junit.Test
 
 class FFmpegTestForAndroid {
 
-    private fun runCommand(command: String) {
-        println("$ ffmpeg $command")
+    private fun runCommand(vararg command: String) {
+        println("$ ffmpeg ${command.contentToString()}")
 
-        val code = FFmpegRunner.execute(command)
+        val code = FFmpegRunner.execute(*command)
         println("Code = $code")
         assert(code == 0)
     }
@@ -22,7 +22,11 @@ class FFmpegTestForAndroid {
 
     @Test
     fun testFFmpegCreateColorBar() {
-        val command = "-re -f lavfi -i testsrc=duration=10:size=1920x1080:rate=60 -f null -"
-        runCommand(command)
+        runCommand(
+            "-re",
+            "-f lavfi",
+            "-i testsrc=duration=10:size=1920x1080:rate=60",
+            "-f null -"
+        )
     }
 }

@@ -4,6 +4,7 @@ import android.util.Log
 import com.sun.jna.Callback
 import com.sun.jna.Library
 import com.sun.jna.Native
+import kotlin.collections.forEach
 
 internal fun interface FFmpegLogCallback : Callback {
     fun invoke(sessionId: Long, level: Int, logText: String?)
@@ -41,9 +42,11 @@ actual object FFmpegRunner {
         instance
     }
 
-    actual fun execute(cmd: String): Int {
+    actual fun execute(vararg cmd: String): Int {
         return try {
-            val sessionId = cLib.ffmpeg_kit_execute(cmd)
+            val command = StringBuilder()
+            cmd.forEach { command.append(it).append(" ") }
+            val sessionId = cLib.ffmpeg_kit_execute(command.toString())
 
             // 先尝试获取 session 完整日志
             var logs = cLib.ffmpeg_kit_session_get_logs_as_string(sessionId)

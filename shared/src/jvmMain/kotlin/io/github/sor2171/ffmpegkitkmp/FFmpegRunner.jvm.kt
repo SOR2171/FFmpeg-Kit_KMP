@@ -46,9 +46,11 @@ actual object FFmpegRunner {
         instance
     }
 
-    actual fun execute(cmd: String): Int {
+    actual fun execute(vararg cmd: String): Int {
         return try {
-            val sessionId = cLib.ffmpeg_kit_execute(cmd)
+            val command = StringBuilder()
+            cmd.forEach { command.append(it).append(" ") }
+            val sessionId = cLib.ffmpeg_kit_execute(command.toString())
 
             val logs = cLib.ffmpeg_kit_session_get_logs_as_string(sessionId)
             if (!logs.isNullOrEmpty()) {
