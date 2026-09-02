@@ -10,7 +10,7 @@ This is a Kotlin Multiplatform lib project targeting Android, Desktop (JVM).
 ![](https://img.shields.io/github/license/sor2171/Audio-Detection-Tool_FFmpegKit.svg)
 ![](https://img.shields.io/badge/Kotlin_Multiplatform-7F52FF?style=flat&logo=kotlin&logoColor=white)
 
-## Use With Gradle
+## Use with Gradle
 
 ```kotlin
 commonMain.dependencies {
@@ -39,6 +39,19 @@ fun testFFmpegCreateColorBar() {
 ```
 
 Run FFprobe command like this:
+
+```kotlin
+fun ffprobe() {
+    val json = FFmpegRunner.ffprobe(
+        "-v quiet",
+        "-print_format json",
+        "-show_format",
+        "-show_streams",
+        "D:\\Media\\Blender\\output\\meteor_Miku.mp4"
+    )
+    println(json)
+}
+```
 
 If you encounter with this error:
 
