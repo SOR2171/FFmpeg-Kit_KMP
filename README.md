@@ -14,7 +14,27 @@ This is a Kotlin Multiplatform lib project targeting Android, Desktop (JVM).
 
 ```kotlin
 commonMain.dependencies {
-    implementation("io.github.sor2171:ffmpeg-kit-kmp:0.11.1")
+    implementation("io.github.sor2171:ffmpeg-kit-kmp:0.11.2")
+}
+```
+
+Run command like this:
+```kotlin
+fun runCommand(vararg command: String) {
+    println("$ ffmpeg ${command.contentToString()}")
+
+    val code = FFmpegRunner.execute(*command)
+    println("Code = $code")
+    assert(code == 0)
+}
+
+fun testFFmpegCreateColorBar() {
+    runCommand(
+        "-re",
+        "-f lavfi",
+        "-i testsrc=duration=10:size=1920x1080:rate=60",
+        "-f null -"
+    )
 }
 ```
 
