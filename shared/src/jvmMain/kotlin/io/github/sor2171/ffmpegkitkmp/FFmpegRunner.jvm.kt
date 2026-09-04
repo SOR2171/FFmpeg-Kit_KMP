@@ -2,7 +2,6 @@ package io.github.sor2171.ffmpegkitkmp
 
 import com.sun.jna.Library
 import com.sun.jna.Native
-import com.sun.jna.Pointer
 import org.slf4j.LoggerFactory
 
 @Suppress("FunctionName")
@@ -14,8 +13,6 @@ internal interface FFmpegKitCLib : Library {
 
     fun ffprobe_kit_execute(command: String): Long
     fun ffprobe_kit_close_session(sessionId: Long)
-    fun ffprobe_get_output(sessionId: Long): Pointer?
-    fun ffprobe_get_output_size(sessionId: Long): Long
 }
 
 @Suppress("EXPECT_ACTUAL_CLASSIFIERS_ARE_IN_BETA_WARNING")
@@ -53,24 +50,10 @@ actual object FFmpegRunner {
             val sessionId = cLib.ffprobe_kit_execute(command)
             if (sessionId == 0L) return null
 
-            val ptr = cLib.ffprobe_get_output(sessionId)
-            val size = cLib.ffprobe_get_output_size(sessionId)
-            var output = if (ptr != null && size > 0) {
-                ptr.getString(0, Charsets.UTF_8.toString())
-            } else null
-
-            if (output.isNullOrBlank()) {
-                val logs = cLib.ffmpeg_kit_session_get_logs_as_string(sessionId)
-                if (!logs.isNullOrBlank()) {
-                    output = logs
-                        .lines()
-                        .joinToString("\n") { it.substringAfter("STDERR:") }
-                        .trim()
-                }
-            }
+            val logs = cLib.ffmpeg_kit_session_get_logs_as_string(sessionId)
 
             cLib.ffprobe_kit_close_session(sessionId)
-            output
+            logs
         } catch (e: Throwable) {
             log.error("FFprobe error", e)
             null
