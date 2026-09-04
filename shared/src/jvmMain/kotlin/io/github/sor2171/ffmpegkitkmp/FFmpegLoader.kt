@@ -1,9 +1,9 @@
 package io.github.sor2171.ffmpegkitkmp
 
-import io.github.sor2171.ffmpegkitkmp.Platform.Os
 import java.io.File
+import java.io.IOException
+import java.io.InputStream
 import java.io.RandomAccessFile
-import java.nio.channels.FileLock
 import java.security.MessageDigest
 
 object NativeLibraryLoader {
@@ -23,27 +23,28 @@ object NativeLibraryLoader {
 
         val hash = computeResourceHash(resourcePath)
         val tempDir = System.getProperty("java.io.tmpdir")
-        val tempFile = File(tempDir, "ffmpegkit_$hash$suffix")
+        val tempFile = File(tempDir, "ffmpeg_$hash$suffix")
 
-        val lockFile = File(tempDir, "ffmpegkit_$hash.lock")
+        val lockFile = File(tempDir, "ffmpeg_$hash.lock")
         lockFile.parentFile?.mkdirs()
 
-        RandomAccessFile(lockFile, "rw").use { raf ->
-            val lock: FileLock = raf.channel.lock() // 排他锁，阻塞等待
-            try {
-                if (!tempFile.exists()) {
-                    val inputStream = getResourceStream(resourcePath)
-                        ?: throw IllegalStateException("资源未找到: $resourcePath")
-
-                    inputStream.use { input ->
-                        tempFile.outputStream().use { output ->
-                            input.copyTo(output)
+        if (!tempFile.exists() || tempFile.length() == 0L) {
+            RandomAccessFile(lockFile, "rw").use { raf ->
+                raf.channel.lock().use { _ ->
+                    if (!tempFile.exists() || tempFile.length() == 0L) {
+                        val inputStream = getResourceStream(resourcePath)
+                            ?: throw IllegalStateException("资源未找到: $resourcePath")
+                        inputStream.use { input ->
+                            tempFile.outputStream().use { output ->
+                                input.copyTo(output)
+                            }
+                        }
+                        if (tempFile.length() == 0L) {
+                            tempFile.delete()
+                            throw IOException("写入的临时文件为空")
                         }
                     }
-                    tempFile.outputStream().use { it.flush() }
                 }
-            } finally {
-                lock.release()
             }
         }
 
@@ -73,7 +74,7 @@ object NativeLibraryLoader {
         }
     }
 
-    private fun getResourceStream(resourcePath: String): java.io.InputStream? {
+    private fun getResourceStream(resourcePath: String): InputStream? {
         return Thread.currentThread().contextClassLoader?.getResourceAsStream(resourcePath)
             ?: javaClass.getResourceAsStream(resourcePath)
             ?: ClassLoader.getSystemClassLoader().getResourceAsStream(resourcePath)
@@ -83,13 +84,13 @@ object NativeLibraryLoader {
         val platform = currentPlatform()
 
         return when (platform.os) {
-            Os.Windows if platform.architecture == Platform.Architecture.X86_64
+            Platform.Os.Windows if platform.architecture == Platform.Architecture.X86_64
                 -> "/natives/windows-x86_64/libffmpegkit.dll" to ".dll"
 
-            Os.MacOS if platform.architecture == Platform.Architecture.Arm64
+            Platform.Os.MacOS if platform.architecture == Platform.Architecture.Arm64
                 -> "/natives/macos-universal/ffmpegkit.dylib" to ".dylib"
 
-            Os.Linux if platform.architecture == Platform.Architecture.X86_64
+            Platform.Os.Linux if platform.architecture == Platform.Architecture.X86_64
                 -> "/natives/linux-x86_64/libffmpegkit.so" to ".so"
 
             else -> throw UnsupportedOperationException("Unsupported OS: ${platform.os}, architecture: ${platform.architecture}.")

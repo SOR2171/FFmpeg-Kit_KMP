@@ -20,6 +20,7 @@ class FFmpegTest {
         println("Arch: ${System.getProperty("os.arch")}")
 
         runCommand("-version")
+        runCommand("-encoders")
     }
 
     @Test
