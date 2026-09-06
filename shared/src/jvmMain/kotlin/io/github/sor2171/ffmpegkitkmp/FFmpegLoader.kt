@@ -87,11 +87,17 @@ object NativeLibraryLoader {
             Platform.Os.Windows if platform.architecture == Platform.Architecture.X86_64
                 -> "/natives/windows-x86_64/libffmpegkit.dll" to ".dll"
 
+            Platform.Os.Windows if platform.architecture == Platform.Architecture.Arm64
+                -> "/natives/windows-arm64/libffmpegkit.dll" to ".dll"
+
             Platform.Os.MacOS if platform.architecture == Platform.Architecture.Arm64
                 -> "/natives/macos-universal/ffmpegkit.dylib" to ".dylib"
 
             Platform.Os.Linux if platform.architecture == Platform.Architecture.X86_64
                 -> "/natives/linux-x86_64/libffmpegkit.so" to ".so"
+
+            Platform.Os.Linux if platform.architecture == Platform.Architecture.Arm64
+                -> "/natives/linux-arm64/libffmpegkit.so" to ".so"
 
             else -> throw UnsupportedOperationException("Unsupported OS: ${platform.os}, architecture: ${platform.architecture}.")
         }
