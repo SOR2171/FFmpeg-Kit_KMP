@@ -20,9 +20,7 @@ actual object FFmpegRunner {
     val log = LoggerFactory.getLogger(this.javaClass)!!
 
     private val cLib: FFmpegKitCLib by lazy {
-        val libAbsolutePath = NativeLibraryLoader.loadFFmpeg()
-        val instance = Native.load(libAbsolutePath, FFmpegKitCLib::class.java)
-        instance
+        Native.load("ffmpegkit", FFmpegKitCLib::class.java)
     }
 
     actual fun execute(vararg cmd: String): String? {

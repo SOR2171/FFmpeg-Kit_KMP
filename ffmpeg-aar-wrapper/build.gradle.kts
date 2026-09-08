@@ -1,2 +1,2 @@
 configurations.maybeCreate("default")
-artifacts.add("default", file("libs/bundle-base-shared-lgpl-release.aar"))
+artifacts.add("default", file("libs/bundle-video_hw-shared-gpl-release.aar"))
