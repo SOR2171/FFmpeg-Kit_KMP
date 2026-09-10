@@ -5,10 +5,6 @@ import org.junit.Test
 class FFmpegTest {
 
     private fun runCommand(vararg command: String) {
-        val cmd = StringBuilder()
-        command.forEach { cmd.append(it).append(" ") }
-        println("$ ffmpeg $cmd")
-
         val output = FFmpegRunner.execute(*command)
         println("output = $output")
         assert(output != null)
