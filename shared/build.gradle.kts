@@ -72,7 +72,9 @@ mavenPublishing {
         name.set("FFmpegKitKmp")
 
         description.set(
-            "FFmpegKitKmp is a FFmpeg runner for Android and all JVM."
+            "FFmpegKitKmp is a FFmpeg runner for Android and all JVM. " +
+                    "The Kotlin code is MIT licensed; bundled FFmpeg / FFmpeg Kit " +
+                    "components are licensed under LGPL-3.0 or GPL-3.0."
         )
 
         inceptionYear.set("2026")
@@ -83,6 +85,16 @@ mavenPublishing {
             license {
                 name.set("MIT")
                 url.set("https://opensource.org/licenses/MIT")
+                distribution.set("repo")
+                comments.set("Applies to the Kotlin code in this project.")
+            }
+            license {
+                name.set("GPL-3.0")
+                url.set("https://www.gnu.org/licenses/gpl-3.0.html")
+                distribution.set("repo")
+                comments.set(
+                    "Applies to FFmpeg components."
+                )
             }
         }
 
