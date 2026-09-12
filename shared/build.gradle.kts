@@ -20,12 +20,22 @@ base {
 }
 
 kotlin {
+//    listOf(
+//        iosArm64(),
+//        iosSimulatorArm64()
+//    ).forEach { iosTarget ->
+//        iosTarget.binaries.framework {
+//            baseName = "Shared"
+//            isStatic = true
+//        }
+//    }
+
     jvm()
 
     android {
         namespace = "io.github.sor2171.ffmpegkitkmp"
-        compileSdk = libs.versions.android.compileSdk.get().toInt()
-        minSdk = libs.versions.android.minSdk.get().toInt()
+        compileSdk = 37
+        minSdk = 28
 
         compilerOptions {
             jvmTarget = JvmTarget.JVM_11
@@ -45,7 +55,6 @@ kotlin {
             // https://github.com/akashskypatel/ffmpeg-kit-builders
             implementation(project(":ffmpeg-aar-wrapper"))
 
-            //noinspection UseTomlInstead
             implementation("net.java.dev.jna:jna:5.19.1@aar")
             implementation(libs.androidx.espresso.core)
         }
