@@ -27,8 +27,9 @@ iOS support is planned, but not soon.
 
 ## Use with Gradle
 
-**NOTICE**: This version is subject to GPL-3.0,
-namely `bundle-video_hw-shared-gpl-release`.
+> [!IMPORTANT]
+> This version is subject to GPL-3.0,
+> namely `bundle-video_hw-shared-gpl-release`.
 
 ```kotlin
 commonMain.dependencies {
@@ -46,6 +47,8 @@ If you want to replace the FFmpeg libraries, they are located in
 
 The built artifacts will be in [`shared/build/libs`](./shared/build/libs) /
 [`shared/build/outputs/aar`](./shared/build/outputs/aar).
+
+## Use in Kotlin
 
 To run an FFmpeg command:
 
@@ -78,17 +81,18 @@ fun ffprobe() {
 
 ## License & Compliance
 
-The Kotlin code in this repository is MIT licensed (see `LICENSE`).
+The Kotlin code in this repository is MIT licensed (see [`LICENSE`](./LICENSE)).
 
 This project uses FFmpeg Kit from
 [akashskypatel/ffmpeg-kit-builders](https://github.com/akashskypatel/ffmpeg-kit-builders)
 (release v0.11.0). The upstream project is generally licensed under
 [LGPL-3.0](https://github.com/akashskypatel/ffmpeg-kit-builders/blob/master/LICENSE),
-but the Maven artifact `io.github.sor2171:ffmpeg-kit-kmp:0.11.4` bundles
+but the Maven artifact `io.github.sor2171:ffmpeg-kit-kmp:xx.xx.xx` bundles
 `bundle-video_hw-shared-gpl-release`, so that artifact is subject to GPL-3.0.
 
 FFmpeg / FFmpeg Kit components may be subject to LGPL-3.0 or GPL-3.0 depending
-on the build variant. Full texts are in `LICENSE-LGPL` and `LICENSE-GPL`.
+on the build variant. Full texts are in [`LICENSE-LGPL`](./LICENSE-LGPL) and
+[`LICENSE-GPL`](./LICENSE-GPL).
 
 Whether you use the Maven artifact or build a JAR/AAR from this repository,
 you must comply with the applicable LGPL/GPL terms when distributing. The MIT
