@@ -7,7 +7,12 @@ import com.sun.jna.Native
 actual interface FFmpegKitCLib : Library {
     actual companion object {
         actual val INSTANCE: FFmpegKitCLib by lazy {
-            Native.load("ffmpegkit", FFmpegKitCLib::class.java)
+            System.setProperty("jna.encoding", "UTF-8")
+            Native.load(
+                "ffmpegkit",
+                FFmpegKitCLib::class.java,
+                mapOf(Library.OPTION_STRING_ENCODING to "UTF-8")
+            )
         }
     }
 

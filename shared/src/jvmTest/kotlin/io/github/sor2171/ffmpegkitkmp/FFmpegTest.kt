@@ -36,7 +36,7 @@ class FFmpegTest {
             "-print_format json",
             "-show_format",
             "-show_streams",
-            "D:\\Media\\Blender\\output\\meteor_Miku.mp4"
+            "D:\\Media\\Blender\\output\\人是猫_Miku.mov"
         )
         println(result)
     }

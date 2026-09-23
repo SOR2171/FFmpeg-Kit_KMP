@@ -42,6 +42,7 @@ object FFmpegRunner {
     fun ffprobe(vararg cmd: String): String? {
         return try {
             val command = cmd.joinToString(" ")
+            logger.info("$ ffprobe $command")
             val sessionId = cLib.ffprobe_kit_execute(command)
             if (sessionId == 0L) return null
 
